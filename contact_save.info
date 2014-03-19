@@ -1,0 +1,4 @@
+name = Contact Save
+description = Saves contact messages in the database.
+core = 7.x
+dependencies[] = contact
