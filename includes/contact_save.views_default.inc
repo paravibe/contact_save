@@ -30,6 +30,7 @@ function contact_save_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -37,15 +38,24 @@ function contact_save_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
+    'id' => 'id',
     'cid' => 'cid',
     'uid' => 'uid',
     'mail' => 'mail',
     'subject' => 'subject',
     'message' => 'message',
     'created' => 'created',
+    'delete_message' => 'delete_message',
   );
   $handler->display->display_options['style_options']['default'] = 'created';
   $handler->display->display_options['style_options']['info'] = array(
+    'id' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
     'cid' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
@@ -84,6 +94,11 @@ function contact_save_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
+    'delete_message' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   /* No results behavior: Global: Unfiltered text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
@@ -99,6 +114,8 @@ function contact_save_views_default_views() {
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'contact_save';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['empty'] = 'anonymous';
+  $handler->display->display_options['fields']['uid']['empty_zero'] = TRUE;
   /* Field: Contact submissions: E-mail */
   $handler->display->display_options['fields']['mail']['id'] = 'mail';
   $handler->display->display_options['fields']['mail']['table'] = 'contact_save';
@@ -115,18 +132,73 @@ function contact_save_views_default_views() {
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'contact_save';
   $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['date_format'] = 'long';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  /* Field: Contact submissions: Delete link */
+  $handler->display->display_options['fields']['delete_message']['id'] = 'delete_message';
+  $handler->display->display_options['fields']['delete_message']['table'] = 'contact_save';
+  $handler->display->display_options['fields']['delete_message']['field'] = 'delete_message';
+  /* Filter criterion: Contact submissions: E-mail */
+  $handler->display->display_options['filters']['mail']['id'] = 'mail';
+  $handler->display->display_options['filters']['mail']['table'] = 'contact_save';
+  $handler->display->display_options['filters']['mail']['field'] = 'mail';
+  $handler->display->display_options['filters']['mail']['operator'] = 'word';
+  $handler->display->display_options['filters']['mail']['group'] = 1;
+  $handler->display->display_options['filters']['mail']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['mail']['expose']['operator_id'] = 'mail_op';
+  $handler->display->display_options['filters']['mail']['expose']['label'] = 'E-mail';
+  $handler->display->display_options['filters']['mail']['expose']['operator'] = 'mail_op';
+  $handler->display->display_options['filters']['mail']['expose']['identifier'] = 'mail';
+  $handler->display->display_options['filters']['mail']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  /* Filter criterion: Contact submissions: Message subject */
+  $handler->display->display_options['filters']['subject']['id'] = 'subject';
+  $handler->display->display_options['filters']['subject']['table'] = 'contact_save';
+  $handler->display->display_options['filters']['subject']['field'] = 'subject';
+  $handler->display->display_options['filters']['subject']['operator'] = 'word';
+  $handler->display->display_options['filters']['subject']['group'] = 1;
+  $handler->display->display_options['filters']['subject']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['subject']['expose']['operator_id'] = 'subject_op';
+  $handler->display->display_options['filters']['subject']['expose']['label'] = 'Message subject';
+  $handler->display->display_options['filters']['subject']['expose']['operator'] = 'subject_op';
+  $handler->display->display_options['filters']['subject']['expose']['identifier'] = 'subject';
+  $handler->display->display_options['filters']['subject']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
+  /* Filter criterion: Contact submissions: Message */
+  $handler->display->display_options['filters']['message']['id'] = 'message';
+  $handler->display->display_options['filters']['message']['table'] = 'contact_save';
+  $handler->display->display_options['filters']['message']['field'] = 'message';
+  $handler->display->display_options['filters']['message']['operator'] = 'word';
+  $handler->display->display_options['filters']['message']['group'] = 1;
+  $handler->display->display_options['filters']['message']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['message']['expose']['operator_id'] = 'message_op';
+  $handler->display->display_options['filters']['message']['expose']['label'] = 'Message';
+  $handler->display->display_options['filters']['message']['expose']['operator'] = 'message_op';
+  $handler->display->display_options['filters']['message']['expose']['identifier'] = 'message';
+  $handler->display->display_options['filters']['message']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
 
   /* Display: Contact messages */
   $handler = $view->new_display('page', 'Contact messages', 'page');
-  $handler->display->display_options['path'] = 'admin/reports/contact';
+  $handler->display->display_options['path'] = 'admin/reports/contact/messages';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'Contact messages';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['name'] = 'management';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+  $handler->display->display_options['tab_options']['type'] = 'normal';
+  $handler->display->display_options['tab_options']['title'] = 'Contact messages';
   $handler->display->display_options['tab_options']['weight'] = '0';
+  $handler->display->display_options['tab_options']['name'] = 'management';
 
   $views[$view->name] = $view;
 

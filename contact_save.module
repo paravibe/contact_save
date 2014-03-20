@@ -10,9 +10,18 @@ function contact_save_menu() {
     'title' => 'Contact save settings',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('contact_save_settings'),
-    'access arguments' => array('administer site-wide contact form'),
+    'access arguments' => array('administer contact forms'),
     'type' => MENU_LOCAL_TASK,
     'weight' => 1,
+    'file' => 'includes/contact_save.admin.inc',
+  );
+
+  $items['admin/reports/contact/message/%/delete'] = array(
+    'title' => 'Contact save settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('contact_save_message_delete_form', 4),
+    'access arguments' => array('administer contact forms'),
+    'type' => MENU_CALLBACK,
     'file' => 'includes/contact_save.admin.inc',
   );
 

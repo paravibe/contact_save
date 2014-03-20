@@ -31,6 +31,26 @@ function contact_save_views_data() {
     ),
   );
 
+  $data['contact_save']['id'] = array(
+    'title' => t('Message ID'),
+    'help' => t('Contact message ID'),
+    'field' => array(
+      'handler' => 'views_handler_field_numeric',
+      'click sortable' => TRUE,
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_numeric',
+      'numeric' => TRUE,
+      'name field' => 'cid',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_numeric',
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+
   $data['contact_save']['cid'] = array(
     'title' => t('Contact ID'),
     'help' => t('Contact ID'),
@@ -132,7 +152,7 @@ function contact_save_views_data() {
     'field' => array(
       'title' => t('Delete link'),
       'help' => t('Provide a simple link to delete the message.'),
-      'handler' => 'views_handler_message_link_delete',
+      'handler' => 'contact_save_handler_message_link_delete',
     ),
   );
 
