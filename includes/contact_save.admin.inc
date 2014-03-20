@@ -3,7 +3,7 @@
 /**
  * Displays contact form submissions.
  */
-function contact_save_submissions($form, &$form_state) {
+function contact_save_settings($form, &$form_state) {
   $form = array();
 
   $submissions = contact_save_get_submissions();

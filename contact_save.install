@@ -27,13 +27,19 @@ function contact_save_schema() {
         'not null' => TRUE,
         'default' => '',
       ),
-      'sender' => array(
+      'mail' => array(
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
       ),
-      'body' => array(
+      'subject' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'message' => array(
         'type' => 'text',
         'size' => 'big',
         'not null' => TRUE,
@@ -49,7 +55,7 @@ function contact_save_schema() {
         'table' => 'contact',
         'columns' => array('cid' => 'cid'),
       ),
-      'sender_author' => array(
+      'mail_author' => array(
         'table' => 'users',
         'columns' => array('uid' => 'uid'),
       ),
