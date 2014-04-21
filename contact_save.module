@@ -9,7 +9,7 @@ define('CONTACT_SAVE_MESSAGES_LIST_PATH', 'admin/structure/contact/messages');
 require_once 'includes/contact_save.views.inc';
 
 /**
- * Implements of hook_menu().
+ * Implements hook_menu().
  */
 function contact_save_menu() {
   $items['admin/structure/contact/settings'] = array(
@@ -47,7 +47,7 @@ function contact_save_cron() {
 }
 
 /**
- * Implements of hook_mail_alter().
+ * Implements hook_mail_alter().
  */
 function contact_save_mail_alter(&$message) {
   if ($message['id'] == 'contact_page_mail') {

@@ -1,7 +1,11 @@
 <?php
+/**
+ * @file
+ * Install, update, and uninstall functions for the contact_save module.
+ */
 
 /**
- * Implements of hook_schema().
+ * Implements hook_schema().
  */
 function contact_save_schema() {
   $schema['contact_save'] = array(

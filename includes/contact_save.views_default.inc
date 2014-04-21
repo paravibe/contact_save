@@ -6,7 +6,7 @@
  */
 
 /**
- * Implementation of hook_views_default_views()
+ * Implements hook_views_default_views().
  */
 function contact_save_views_default_views() {
   $views = array();
@@ -39,67 +39,67 @@ function contact_save_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-  'id' => 'id',
-  'cid' => 'cid',
-  'uid' => 'uid',
-  'mail' => 'mail',
-  'subject' => 'subject',
-  'message' => 'message',
-  'created' => 'created',
-  'delete_message' => 'delete_message',
+    'id' => 'id',
+    'cid' => 'cid',
+    'uid' => 'uid',
+    'mail' => 'mail',
+    'subject' => 'subject',
+    'message' => 'message',
+    'created' => 'created',
+    'delete_message' => 'delete_message',
   );
   $handler->display->display_options['style_options']['default'] = 'created';
   $handler->display->display_options['style_options']['info'] = array(
-  'id' => array(
-  'sortable' => 1,
-  'default_sort_order' => 'asc',
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
-  'cid' => array(
-  'sortable' => 1,
-  'default_sort_order' => 'asc',
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
-  'uid' => array(
-  'sortable' => 1,
-  'default_sort_order' => 'asc',
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
-  'mail' => array(
-  'sortable' => 1,
-  'default_sort_order' => 'asc',
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
-  'subject' => array(
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
-  'message' => array(
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
-  'created' => array(
-  'sortable' => 1,
-  'default_sort_order' => 'desc',
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
-  'delete_message' => array(
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
+    'id' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'cid' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'uid' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'mail' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'subject' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'message' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'created' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'delete_message' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   /* Footer: Global: Result summary */
   $handler->display->display_options['footer']['result']['id'] = 'result';
@@ -163,9 +163,9 @@ function contact_save_views_default_views() {
   $handler->display->display_options['filters']['mail']['expose']['operator'] = 'mail_op';
   $handler->display->display_options['filters']['mail']['expose']['identifier'] = 'mail';
   $handler->display->display_options['filters']['mail']['expose']['remember_roles'] = array(
-  2 => '2',
-  1 => 0,
-  3 => 0,
+    2 => '2',
+    1 => 0,
+    3 => 0,
   );
   /* Filter criterion: Contact message: Subject */
   $handler->display->display_options['filters']['subject']['id'] = 'subject';
@@ -179,9 +179,9 @@ function contact_save_views_default_views() {
   $handler->display->display_options['filters']['subject']['expose']['operator'] = 'subject_op';
   $handler->display->display_options['filters']['subject']['expose']['identifier'] = 'subject';
   $handler->display->display_options['filters']['subject']['expose']['remember_roles'] = array(
-  2 => '2',
-  1 => 0,
-  3 => 0,
+    2 => '2',
+    1 => 0,
+    3 => 0,
   );
   /* Filter criterion: Contact message: Body */
   $handler->display->display_options['filters']['message']['id'] = 'message';
@@ -195,9 +195,9 @@ function contact_save_views_default_views() {
   $handler->display->display_options['filters']['message']['expose']['operator'] = 'message_op';
   $handler->display->display_options['filters']['message']['expose']['identifier'] = 'message';
   $handler->display->display_options['filters']['message']['expose']['remember_roles'] = array(
-  2 => '2',
-  1 => 0,
-  3 => 0,
+    2 => '2',
+    1 => 0,
+    3 => 0,
   );
 
   /* Display: Contact messages */
@@ -278,49 +278,49 @@ function contact_save_views_default_views() {
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-  'mail' => 'mail',
-  'subject' => 'subject',
-  'message' => 'message',
-  'created' => 'created',
-  'reply' => 'reply',
-  'delete_message' => 'delete_message',
+    'mail' => 'mail',
+    'subject' => 'subject',
+    'message' => 'message',
+    'created' => 'created',
+    'reply' => 'reply',
+    'delete_message' => 'delete_message',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
-  'mail' => array(
-  'sortable' => 0,
-  'default_sort_order' => 'asc',
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
-  'subject' => array(
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
-  'message' => array(
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
-  'created' => array(
-  'sortable' => 0,
-  'default_sort_order' => 'asc',
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
-  'reply' => array(
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
-  'delete_message' => array(
-  'align' => '',
-  'separator' => '',
-  'empty_column' => 0,
-  ),
+    'mail' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'subject' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'message' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'created' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'reply' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'delete_message' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -384,7 +384,6 @@ function contact_save_views_default_views() {
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   $handler->display->display_options['path'] = 'admin/structure/contact/message/%';
-
   $views[$view->name] = $view;
 
   return $views;
