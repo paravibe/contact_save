@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * Contact save module logic.
+ */
+
+define('CONTACT_SAVE_MESSAGES_LIST_PATH', 'admin/reports/contact/messages');
 
 require_once 'includes/contact_save.views.inc';
 
@@ -39,7 +45,7 @@ function contact_save_mail_alter(&$message) {
       'name' => $message['params']['name'],
       'mail' => $message['params']['mail'],
       'subject' => $message['params']['subject'],
-      'message' => implode('\n', $message['body']),
+      'message' => implode("\n", $message['body']),
       'created' => REQUEST_TIME,
     );
 
@@ -57,15 +63,19 @@ function contact_save_views_api() {
   );
 }
 
-function contact_save_get_submissions() {
-  $query = db_select('contact_save', 'cs');
-  $query->fields('cs');
-  $query->join('contact', 'c', 'cs.cid = c.cid');
-  $query->fields('c', array('category'));
-  $query->join('users', 'u', 'cs.uid = u.uid');
-  $query->fields('u', array('name'));
+/**
+ * Delete message by ID.
+ *
+ * @param int $id
+ *   Message ID.
+ *
+ * @return int
+ */
+function contact_save_message_delete($id) {
+  $query = db_delete('contact_save')
+    ->condition('id', $id, '=');
 
-  $results = $query->execute()->fetchAllAssoc('id');
+  $result = $query->execute();
 
-  return $results;
+  return $result;
 }
