@@ -12,6 +12,7 @@ function contact_save_views_default_views() {
   $views = array();
 
 	$view = new view();
+	$view = new view();
 	$view->name = 'contact_messages';
 	$view->description = 'Display a list of messages that was sent through contact form.';
 	$view->tag = 'default';
@@ -238,7 +239,7 @@ function contact_save_views_default_views() {
 	$handler->display->display_options['fields']['message']['label'] = 'Message body';
 	$handler->display->display_options['fields']['message']['alter']['max_length'] = '250';
 	$handler->display->display_options['fields']['message']['alter']['more_link_text'] = 'read more';
-	$handler->display->display_options['fields']['message']['alter']['more_link_path'] = 'admin/reports/contact/message/[id]';
+	$handler->display->display_options['fields']['message']['alter']['more_link_path'] = 'admin/structure/contact/message/[id]';
 	$handler->display->display_options['fields']['message']['alter']['trim'] = TRUE;
 	/* Field: Contact message: Created */
 	$handler->display->display_options['fields']['created']['id'] = 'created';
@@ -257,8 +258,8 @@ function contact_save_views_default_views() {
 	$handler->display->display_options['fields']['delete_link']['id'] = 'delete_link';
 	$handler->display->display_options['fields']['delete_link']['table'] = 'contact_save';
 	$handler->display->display_options['fields']['delete_link']['field'] = 'delete_link';
-	$handler->display->display_options['path'] = 'admin/reports/contact/messages';
-	$handler->display->display_options['menu']['type'] = 'default tab';
+	$handler->display->display_options['path'] = 'admin/structure/contact/messages';
+	$handler->display->display_options['menu']['type'] = 'tab';
 	$handler->display->display_options['menu']['title'] = 'Contact messages';
 	$handler->display->display_options['menu']['weight'] = '0';
 	$handler->display->display_options['menu']['name'] = 'management';
@@ -329,7 +330,7 @@ function contact_save_views_default_views() {
 	$handler->display->display_options['header']['area']['id'] = 'area';
 	$handler->display->display_options['header']['area']['table'] = 'views';
 	$handler->display->display_options['header']['area']['field'] = 'area';
-	$handler->display->display_options['header']['area']['content'] = '<a href="/admin/reports/contact/messages">Return to the list</a>';
+	$handler->display->display_options['header']['area']['content'] = '<a href="/admin/structure/contact/messages">Return to the list</a>';
 	$handler->display->display_options['header']['area']['format'] = 'filtered_html';
 	$handler->display->display_options['defaults']['footer'] = FALSE;
 	$handler->display->display_options['defaults']['relationships'] = FALSE;
@@ -382,7 +383,7 @@ function contact_save_views_default_views() {
 	$handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
 	$handler->display->display_options['defaults']['filter_groups'] = FALSE;
 	$handler->display->display_options['defaults']['filters'] = FALSE;
-	$handler->display->display_options['path'] = 'admin/reports/contact/message/%';
+	$handler->display->display_options['path'] = 'admin/structure/contact/message/%';
 
   $views[$view->name] = $view;
 

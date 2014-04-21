@@ -1,6 +1,7 @@
 name = Contact save
 description = Saves contact messages in the database.
 core = 7.x
+configure = admin/structure/contact/settings
 dependencies[] = contact
 dependencies[] = views
 files[] = handlers/contact_save_handler_message_link_view.inc

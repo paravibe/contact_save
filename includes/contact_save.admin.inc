@@ -10,11 +10,16 @@
 function contact_save_settings($form, &$form_state) {
   $form = array();
 
-  $form['test'] = array(
-    '#markup' => 'Settings will be here',
+  $form['contact_save_live_time'] = array(
+    '#type' => 'select',
+    '#title' => t('Delete old messages older than'),
+    '#required' => TRUE,
+    '#options' => array(0 => t('Never')) + drupal_map_assoc(array(86400, 259200, 604800, 1209600, 2419200, 9676800), 'format_interval'),
+    '#default_value' => variable_get('contact_save_live_time', 0),
+    '#description' => t('Old messages will be automatically deleted. (Requires a correctly configured <a href="@cron">cron maintenance task</a>.)', array('@cron' => url('admin/reports/status'))),
   );
 
-  return $form;
+  return system_settings_form($form);
 }
 
 /**

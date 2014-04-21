@@ -34,10 +34,9 @@ function contact_save_schema() {
         'default' => '',
       ),
       'subject' => array(
-        'type' => 'varchar',
-        'length' => '255',
+        'type' => 'text',
+        'size' => 'big',
         'not null' => TRUE,
-        'default' => '',
       ),
       'message' => array(
         'type' => 'text',

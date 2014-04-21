@@ -49,7 +49,7 @@ class contact_save_handler_message_link_delete extends views_handler_field {
     $text = !empty($this->options['text']) ? $this->options['text'] : t('delete');
 
     $this->options['alter']['make_link'] = TRUE;
-    $this->options['alter']['path'] = 'admin/reports/contact/message/' . $data . '/delete';
+    $this->options['alter']['path'] = 'admin/structure/contact/message/' . $data . '/delete';
 
     return $text;
   }
