@@ -51,13 +51,16 @@ function contact_save_cron() {
  */
 function contact_save_mail_alter(&$message) {
   if ($message['id'] == 'contact_page_mail') {
+    $body = $message['body'];
+    // Remove default contact string.
+    unset($body[0]);
     $record = array(
       'cid' => isset($message['params']['category']['cid']) ? $message['params']['category']['cid'] : 1,
       'uid' => isset($message['params']['sender']) ? $message['params']['sender']->uid : 0,
       'name' => $message['params']['name'],
       'mail' => $message['params']['mail'],
       'subject' => $message['params']['subject'],
-      'message' => implode("\n", $message['body']),
+      'message' => implode("\n", $body),
       'created' => REQUEST_TIME,
     );
 
