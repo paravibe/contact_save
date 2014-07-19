@@ -41,9 +41,11 @@ function contact_save_menu() {
  */
 function contact_save_cron() {
   $live_time = variable_get('contact_save_live_time', 0);
-  db_delete('contact_save')
-    ->condition('created', REQUEST_TIME - $live_time, '<')
-    ->execute();
+  if ($live_time) {
+    db_delete('contact_save')
+      ->condition('created', REQUEST_TIME - $live_time, '<')
+      ->execute();
+  }
 }
 
 /**
