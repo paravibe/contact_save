@@ -165,6 +165,15 @@ function contact_save_views_data() {
     ),
   );
 
+  $data['contact_save']['read'] = array(
+    'title' => t('Read?'),
+    'help' => t('Flag indicating if the message has been read.'),
+    'field' => array(
+      'handler' => 'views_handler_field_boolean',
+      'click sortable' => TRUE,
+    ),
+  );
+
   $data['contact_save']['view_link'] = array(
     'field' => array(
       'title' => t('View link'),

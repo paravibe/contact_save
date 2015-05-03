@@ -52,6 +52,11 @@ function contact_save_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+      'read' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
     ),
     'foreign keys' => array(
       'category' => array(
@@ -92,5 +97,25 @@ function contact_save_update_7001() {
     ))
     ->condition('type', 'module')
     ->condition('name', 'contact_save')
+    ->execute();
+}
+
+/**
+ * Introduce a 'Read' flag for messages and mark all existing messages as having
+ * been read.
+ */
+function contact_save_update_7002(&$sandbox) {
+  $definition = array(
+    'type' => 'int',
+    'description' => "Flag for message read status",
+    'not null' => TRUE,
+    'default' => 0,
+  );
+  db_add_field('contact_save', 'read', $definition);
+
+  db_update('contact_save')
+    ->fields(array(
+      '`read`' => time(),
+    ))
     ->execute();
 }

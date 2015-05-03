@@ -34,6 +34,32 @@ function contact_save_settings($form, &$form_state) {
     '#description' => t('Old messages will be automatically deleted. (Requires a correctly configured <a href="@cron">cron maintenance task</a>.)', array('@cron' => url('admin/reports/status'))),
   );
 
+  $options_yes_no = array(
+    0 => t('No'),
+    1 => t('Yes'),
+  );
+
+  $form['contact_save_unread_message_status_at_login'] = array(
+    '#type' => 'radios',
+    '#title' => t('Show "unread messages" status message on user log in?'),
+    '#default_value' => variable_get('contact_save_unread_message_status_at_login', 1),
+    '#options' => $options_yes_no,
+    '#description' => t('Displays a standard Drupal message to the user when
+      they log in, if there are saved contact messages that have not yet been
+      read. Only for users with the "Administer contact forms" permission.'),
+  );
+
+  $form['contact_save_unread_message_status_on_profile'] = array(
+    '#type' => 'radios',
+    '#title' => t('Show "unread messages" status message on user profile?'),
+    '#default_value' => variable_get('contact_save_unread_message_status_on_profile', 0),
+    '#options' => $options_yes_no,
+    '#description' => t('If there are saved contact messages that have not yet
+      been read, show a message informing the user on their user profile
+      (/user/&lt;uid&gt;) page. Only for users with the "Administer contact
+      forms" permission.'),
+  );
+
   return system_settings_form($form);
 }
 

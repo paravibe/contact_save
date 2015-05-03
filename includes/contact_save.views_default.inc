@@ -269,6 +269,21 @@ function contact_save_views_default_views() {
   $handler->display->display_options['tab_options']['title'] = 'Contact messages';
   $handler->display->display_options['tab_options']['weight'] = '0';
   $handler->display->display_options['tab_options']['name'] = 'management';
+  /* Field: Contact message: Read? */
+  $handler->display->display_options['fields']['read']['id'] = 'read';
+  $handler->display->display_options['fields']['read']['table'] = 'contact_save';
+  $handler->display->display_options['fields']['read']['field'] = 'read';
+  $handler->display->display_options['path'] = 'admin/structure/contact/messages';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'Contact messages';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['name'] = 'management';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+  $handler->display->display_options['tab_options']['type'] = 'normal';
+  $handler->display->display_options['tab_options']['title'] = 'Contact messages';
+  $handler->display->display_options['tab_options']['weight'] = '0';
+  $handler->display->display_options['tab_options']['name'] = 'management';
 
   /* Display: Message */
   $handler = $view->new_display('page', 'Message', 'message');
