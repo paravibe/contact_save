@@ -1,4 +1,3 @@
-
 -- SUMMARY --
 
 Never miss a contact message again! This module stores in the database
