@@ -172,6 +172,9 @@ function contact_save_views_data() {
       'handler' => 'views_handler_field_boolean',
       'click sortable' => TRUE,
     ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_boolean_operator',
+    ),
   );
 
   $data['contact_save']['view_link'] = array(

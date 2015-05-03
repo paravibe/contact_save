@@ -9,9 +9,6 @@
  * Implements hook_views_default_views().
  */
 function contact_save_views_default_views() {
-  $views = array();
-
-  $view = new view();
   $view = new view();
   $view->name = 'contact_messages';
   $view->description = 'Display a list of messages that was sent through contact form.';
@@ -39,25 +36,28 @@ function contact_save_views_default_views() {
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-    'id' => 'id',
     'cid' => 'cid',
+    'id' => 'id',
     'uid' => 'uid',
     'mail' => 'mail',
     'subject' => 'subject',
     'message' => 'message',
     'created' => 'created',
-    'delete_message' => 'delete_message',
+    'view_link' => 'view_link',
+    'reply_link' => 'reply_link',
+    'delete_link' => 'delete_link',
+    'read' => 'read',
   );
   $handler->display->display_options['style_options']['default'] = 'created';
   $handler->display->display_options['style_options']['info'] = array(
-    'id' => array(
+    'cid' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'cid' => array(
+    'id' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -95,7 +95,24 @@ function contact_save_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'delete_message' => array(
+    'view_link' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'reply_link' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'delete_link' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'read' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -199,6 +216,21 @@ function contact_save_views_default_views() {
     1 => 0,
     3 => 0,
   );
+  /* Filter criterion: Contact message: Read? */
+  $handler->display->display_options['filters']['read']['id'] = 'read';
+  $handler->display->display_options['filters']['read']['table'] = 'contact_save';
+  $handler->display->display_options['filters']['read']['field'] = 'read';
+  $handler->display->display_options['filters']['read']['value'] = 'All';
+  $handler->display->display_options['filters']['read']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['read']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['read']['expose']['label'] = 'Read';
+  $handler->display->display_options['filters']['read']['expose']['operator'] = 'read_op';
+  $handler->display->display_options['filters']['read']['expose']['identifier'] = 'read';
+  $handler->display->display_options['filters']['read']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+  );
 
   /* Display: Contact messages */
   $handler = $view->new_display('page', 'Contact messages', 'page');
@@ -258,17 +290,6 @@ function contact_save_views_default_views() {
   $handler->display->display_options['fields']['delete_link']['id'] = 'delete_link';
   $handler->display->display_options['fields']['delete_link']['table'] = 'contact_save';
   $handler->display->display_options['fields']['delete_link']['field'] = 'delete_link';
-  $handler->display->display_options['path'] = 'admin/structure/contact/messages';
-  $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Contact messages';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'management';
-  $handler->display->display_options['menu']['context'] = 0;
-  $handler->display->display_options['menu']['context_only_inline'] = 0;
-  $handler->display->display_options['tab_options']['type'] = 'normal';
-  $handler->display->display_options['tab_options']['title'] = 'Contact messages';
-  $handler->display->display_options['tab_options']['weight'] = '0';
-  $handler->display->display_options['tab_options']['name'] = 'management';
   /* Field: Contact message: Read? */
   $handler->display->display_options['fields']['read']['id'] = 'read';
   $handler->display->display_options['fields']['read']['table'] = 'contact_save';
