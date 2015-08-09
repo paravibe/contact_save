@@ -141,8 +141,11 @@ function contact_save_contact_save_message_read($message_id) {
  *   Either 'read' or 'unread' string.
  */
 function contact_save_message_read_status($message_id) {
-  $query = "SELECT `read` FROM contact_save WHERE id = :id";
-  $read = db_query($query, array(':id' => $message_id))->fetchField();
+  $query = db_select('contact_save', 'cs')
+    ->condition('cs.id', $message_id);
+  $query->addField('cs', 'read', 'read_status');
+
+  $read = $query->execute()->fetchField();
 
   if ($read > 0) {
     return CONTACT_SAVE_MESSAGE_STATE_READ;
@@ -158,9 +161,11 @@ function contact_save_message_read_status($message_id) {
  *   Number of messages that have yet to be read.
  */
 function contact_save_unread_messages() {
-  $query = "SELECT COUNT(id) FROM contact_save WHERE `read` = 0";
-
-  return db_query($query)->fetchField();
+  return db_select('contact_save', 'cs')
+    ->countQuery()
+    ->condition('cs.read', 0)
+    ->execute()
+    ->fetchField();
 }
 
 /**
