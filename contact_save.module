@@ -121,7 +121,7 @@ function contact_save_contact_save_message_read($message_id) {
 
   $result = db_update('contact_save')
     ->fields(array(
-      '`read`' => time(),
+      '`read`' => REQUEST_TIME,
     ))
     ->condition('id', $message_id, '=')
     ->execute();
@@ -141,8 +141,8 @@ function contact_save_contact_save_message_read($message_id) {
  *   Either 'read' or 'unread' string.
  */
 function contact_save_message_read_status($message_id) {
-  $query = db_select('contact_save', 'cs')
-    ->condition('cs.id', $message_id);
+  $query = db_select('contact_save', 'cs');
+  $query->condition('cs.id', $message_id);
   $query->addField('cs', 'read', 'read_status');
 
   $read = $query->execute()->fetchField();
@@ -162,8 +162,8 @@ function contact_save_message_read_status($message_id) {
  */
 function contact_save_unread_messages() {
   return db_select('contact_save', 'cs')
-    ->countQuery()
     ->condition('cs.read', 0)
+    ->countQuery()
     ->execute()
     ->fetchField();
 }
@@ -202,11 +202,18 @@ function contact_save_user_view($account, $view_mode, $langcode) {
           'messages' => array(
             '#type' => 'user_profile_item',
             '#title' => '',
-            '#markup' => t('There are <a href="@url">@number unread contact form
-              messages</a>.', array(
-                '@url' => url(CONTACT_SAVE_MESSAGES_LIST_PATH),
-                '@number' => $unread_messages,
-              )),
+            '#markup' => t(
+              'There are !url.',
+              array(
+                '!url' => l(
+                  format_plural($unread_messages,
+                    'unread contact form message',
+                    'unread contact form messages'
+                  ),
+                  CONTACT_SAVE_MESSAGES_LIST_PATH
+                ),
+              )
+            ),
           ),
         );
       }

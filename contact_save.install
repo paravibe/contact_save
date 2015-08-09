@@ -115,7 +115,7 @@ function contact_save_update_7002(&$sandbox) {
 
   db_update('contact_save')
     ->fields(array(
-      '`read`' => time(),
+      '`read`' => REQUEST_TIME,
     ))
     ->execute();
 }
